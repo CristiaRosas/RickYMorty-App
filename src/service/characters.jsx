@@ -1,16 +1,12 @@
-export const reqCharacter = async (character) => {
-  let url = `https://rickandmortyapi.com/api/character?page=1`;
-  
-  if (character && typeof character === 'string' && character.trim() !== "") {
-      url += `&name=${encodeURIComponent(character)}`;
-  }
-  
-  try {
-      const response = await fetch(url);
-      
-      const data = await response.json();
-      return data;
-  } catch (error) {
-     
-  }
-};
+export const reqCharacters = async (pagina, buscar) => {
+    let url = `https://rickandmortyapi.com/api/character?page=${pagina}`;
+    
+    if (buscar !== null && buscar !== "") {
+        url = `https://rickandmortyapi.com/api/character?name=${buscar}&page=${pagina}`;
+    }
+
+    const resp = await fetch(url);
+    const data = await resp.json();
+
+    return data;
+}
